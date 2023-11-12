@@ -50,7 +50,7 @@ mod graph;
 pub use graph::{circuit_dot_graph, layout::CircuitLayout};
 
 #[derive(Debug)]
-struct Region {
+pub struct Region {
     /// The name of the region. Not required to be unique.
     name: String,
     /// The columns involved in this region.
@@ -61,7 +61,7 @@ struct Region {
     /// construction not enabled.
     enabled_selectors: HashMap<Selector, Vec<usize>>,
     /// Annotations given to Advice, Fixed or Instance columns within a region context.
-    annotations: HashMap<ColumnMetadata, String>,
+    pub annotations: HashMap<ColumnMetadata, String>,
     /// The cells assigned in this region. We store this as a `Vec` so that if any cells
     /// are double-assigned, they will be visibly darker.
     cells: HashMap<(Column<Any>, usize), usize>,
@@ -292,19 +292,19 @@ pub struct MockProver<F: Field> {
     cs: ConstraintSystem<F>,
 
     /// The regions in the circuit.
-    regions: Vec<Region>,
+    pub regions: Vec<Region>,
     /// The current region being assigned to. Will be `None` after the circuit has been
     /// synthesized.
     current_region: Option<Region>,
 
     // The fixed cells in the circuit, arranged as [column][row].
-    fixed: Vec<Vec<CellValue<F>>>,
-    // The advice cells in the circuit, arranged as [column][row].
-    advice: Vec<Vec<CellValue<F>>>,
-    // The instance cells in the circuit, arranged as [column][row].
-    instance: Vec<Vec<InstanceValue<F>>>,
+    pub fixed: Vec<Vec<CellValue<F>>>,
+    /// The advice cells in the circuit, arranged as [column][row].
+    pub advice: Vec<Vec<CellValue<F>>>,
+    /// The instance cells in the circuit, arranged as [column][row].
+    pub instance: Vec<Vec<InstanceValue<F>>>,
 
-    selectors: Vec<Vec<bool>>,
+    pub selectors: Vec<Vec<bool>>,
 
     challenges: Vec<F>,
 
@@ -317,7 +317,7 @@ pub struct MockProver<F: Field> {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-enum InstanceValue<F: Field> {
+pub enum InstanceValue<F: Field> {
     Assigned(F),
     Padding,
 }

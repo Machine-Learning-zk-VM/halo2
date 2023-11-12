@@ -22,13 +22,13 @@ use std::collections::{BTreeSet, HashMap};
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Assembly {
     /// Columns that participate on the copy permutation argument.
-    columns: Vec<Column<Any>>,
+    pub columns: Vec<Column<Any>>,
     /// Mapping of the actual copies done.
-    mapping: Vec<Vec<(usize, usize)>>,
+    pub mapping: Vec<Vec<(usize, usize)>>,
     /// Some aux data used to swap positions directly when sorting.
-    aux: Vec<Vec<(usize, usize)>>,
+    pub aux: Vec<Vec<(usize, usize)>>,
     /// More aux data
-    sizes: Vec<Vec<usize>>,
+    pub sizes: Vec<Vec<usize>>,
 }
 
 #[cfg(not(feature = "thread-safe-region"))]
